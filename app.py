@@ -19,6 +19,7 @@ def load_data():
 def homepage():
     return "Hello, this is the homepage of LLM Energy Route Assignment"
 
+''' Function returns a specified column '''
 @app.route('/<int:neutral_row>/<string:col_name>/')
 def get_column(neutral_row: int, col_name: str) -> str: 
     col_names = data[neutral_row] 
@@ -39,6 +40,7 @@ def get_column(neutral_row: int, col_name: str) -> str:
 
     return str(spec_col)
 
+''' Function returns a specified row '''
 @app.route('/<string:row_name>/')
 def get_row(row_name: str) -> str: 
     name_col_num = 0
@@ -50,7 +52,7 @@ def get_row(row_name: str) -> str:
         
 @app.errorhandler(404)
 def page_not_found(page: str):
-    return "Page not found error:" + str(page)
+    return "Page not found error: " + str(page)
 
 if __name__ == '__main__':
     load_data()

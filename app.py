@@ -4,7 +4,6 @@ import dotenv
 import csv
 
 app = Flask(__name__)
-app.config['DEBUG'] =True
 
 data = []
 
@@ -32,12 +31,10 @@ def get_column(neutral_row: int, col_name: str) -> str:
         else: 
             col_num += 1 
     
-    # if (col_num == len(col_names)): 
-    #     return []
+    if (col_num == len(col_names)): 
+        return []
 
     for i in range(len(data)): 
-        if (col_num == len(col_names)): 
-            break
         spec_col.append(data[i][col_num])
 
     return str(spec_col)
@@ -45,11 +42,8 @@ def get_column(neutral_row: int, col_name: str) -> str:
 @app.route('/<string:row_name>/')
 def get_row(row_name: str) -> str: 
     name_col_num = 0
-    print(f"{row_name}")
     for i in range(len(data)): 
-        print("boolean here: ", data[i][name_col_num] == row_name)
         if (data[i][name_col_num] == row_name): 
-            #print("boolean here: ", data[i][name_col_num] == row_name)
             return str(data[i])
         
     abort(404, description="Row not found") 
